@@ -52,3 +52,14 @@ Para desenvolvimento simultâneo, usar `go.work` local.
 Quando o módulo exportar componentes Templ, o arquivo `.templ` permanece como fonte autoritativa, mas o `*_templ.go` correspondente deve ser gerado e versionado. O Go não executa geração de código automaticamente ao baixar uma dependência pelo `go mod`.
 
 Consumidores não devem gerar código dentro do module cache.
+
+## Assets frontend compartilhados
+
+Assets TypeScript comprovadamente multi-módulo pertencem ao `cargoweb-ccomum`.
+
+Cada conjunto carregável pelo host deve declarar `assets/ts/module.json` com:
+
+- `selector`: seletor CSS que indica quando o comportamento é necessário;
+- `entry`: entrypoint TypeScript do módulo.
+
+O DataGrid genérico possui sua implementação frontend em `assets/ts` e não deve ser duplicado no host ou em módulos de negócio.
