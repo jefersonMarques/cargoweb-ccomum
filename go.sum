@@ -1,4 +1,6 @@
 github.com/a-h/templ v0.3.1020 h1:ypAT/L5ySWEnZ6Zft/5yfoWXYYkhFNvEFOeeqecg4tw=
 github.com/a-h/templ v0.3.1020/go.mod h1:A2DlK61v+K+NRoGnhmYbNYVmtYHcFO5/AisMvBdDxTM=
+github.com/dimmerz92/go-icons v0.56.0 h1:UZ98qKdWLdqPqwdIXCXpp69A4MXpFo9zH9Z0nLt84iU=
+github.com/dimmerz92/go-icons v0.56.0/go.mod h1:WacmH1Q8HqzO58omATEQ/1PuZ7X5wGIpV9cuiNQu5eQ=
 github.com/google/go-cmp v0.6.0 h1:ofyhxvXcZhMsU5ulbFiLKl/XBFqE1GSq7atu8tAmTRI=
 github.com/google/go-cmp v0.6.0/go.mod h1:17dUlkBOakJ0+DkrSSNjCkIjxS6bF9zb3elmeNGIjoY=
