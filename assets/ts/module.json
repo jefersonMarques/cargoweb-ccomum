@@ -1,0 +1,4 @@
+{
+  "selector": "[data-grid]",
+  "entry": "index.ts"
+}
