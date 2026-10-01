@@ -1,0 +1,13 @@
+package ui
+
+templ SummaryFact(label string, value string) {
+	<div class="flex min-w-0 items-start gap-3 border border-brand-line bg-brand-bg/45 px-4 py-3 dark:border-brand-dark-line dark:bg-brand-sidebar-soft/45">
+		<div class="mt-0.5 grid size-8 shrink-0 place-items-center text-brand-orange">
+			{ children... }
+		</div>
+		<div class="min-w-0">
+			<span class="block text-[9px] font-extrabold uppercase tracking-[0.09em] text-brand-muted dark:text-brand-dark-muted">{ label }</span>
+			<strong class="mt-1 block break-words text-xs font-semibold leading-5 text-brand-ink dark:text-slate-100">{ value }</strong>
+		</div>
+	</div>
+}

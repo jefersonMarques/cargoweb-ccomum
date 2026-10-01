@@ -1,0 +1,118 @@
+package ui
+
+import "github.com/dimmerz92/go-icons/lucide"
+
+templ FormSection(title string, description string) {
+	<section class="grid gap-4">
+		<div class="border-b border-brand-line pb-3 dark:border-brand-dark-line">
+			<h3 class="text-sm font-semibold text-brand-ink dark:text-slate-100">{ title }</h3>
+			if description != "" {
+				<p class="mt-1 text-xs leading-5 text-brand-muted dark:text-brand-dark-muted">{ description }</p>
+			}
+		</div>
+		<div class="grid gap-4 sm:grid-cols-2">
+			{ children... }
+		</div>
+	</section>
+}
+
+templ FormTextField(name string, label string, value string, inputType string, autocomplete string, placeholder string, required bool) {
+	@formTextField(name, label, value, inputType, autocomplete, placeholder, nil, required)
+}
+
+templ FormTextFieldWithIcon(name string, label string, value string, inputType string, autocomplete string, placeholder string, icon IconRenderer, required bool) {
+	@formTextField(name, label, value, inputType, autocomplete, placeholder, icon, required)
+}
+
+templ formTextField(name string, label string, value string, inputType string, autocomplete string, placeholder string, icon IconRenderer, required bool) {
+	<label class="block text-[10px] font-extrabold uppercase tracking-[0.07em] text-brand-muted dark:text-brand-dark-muted" data-form-field>
+		<span class="mb-1.5 block">{ label }</span>
+		<span class="block" data-form-field-body>
+			if icon != nil {
+				<span class="relative block" data-form-input-shell data-has-icon="true">
+					<span class="pointer-events-none absolute left-3 top-1/2 z-10 grid size-5 -translate-y-1/2 place-items-center text-brand-muted transition-colors duration-200 dark:text-brand-dark-muted" data-form-field-icon aria-hidden="true">
+						@renderIcon(icon, templ.Attributes{"width": "16", "height": "16", "stroke-width": "1.7", "aria-hidden": "true"})
+					</span>
+					@formTextFieldInput(name, value, inputType, autocomplete, placeholder, required)
+				</span>
+			} else {
+				<span class="relative block" data-form-input-shell>
+					@formTextFieldInput(name, value, inputType, autocomplete, placeholder, required)
+				</span>
+			}
+		</span>
+	</label>
+}
+
+templ formTextFieldInput(name string, value string, inputType string, autocomplete string, placeholder string, required bool) {
+	if required {
+		<input class="min-h-11 w-full border border-brand-line bg-brand-surface px-3 text-sm font-medium normal-case tracking-normal text-brand-ink outline-none transition placeholder:text-brand-muted/60 focus:border-brand-orange focus:ring-2 focus:ring-brand-orange/15 dark:border-brand-dark-line dark:bg-brand-deep dark:text-white" type={ inputType } name={ name } value={ value } autocomplete={ autocomplete } placeholder={ placeholder } maxlength="160" required/>
+	} else {
+		<input class="min-h-11 w-full border border-brand-line bg-brand-surface px-3 text-sm font-medium normal-case tracking-normal text-brand-ink outline-none transition placeholder:text-brand-muted/60 focus:border-brand-orange focus:ring-2 focus:ring-brand-orange/15 dark:border-brand-dark-line dark:bg-brand-deep dark:text-white" type={ inputType } name={ name } value={ value } autocomplete={ autocomplete } placeholder={ placeholder } maxlength="160"/>
+	}
+}
+
+templ FormSelectField(name string, label string, value string, options []FormOption, required bool) {
+	<label class="grid gap-1.5 text-[10px] font-extrabold uppercase tracking-[0.07em] text-brand-muted dark:text-brand-dark-muted">
+		<span>{ label }</span>
+		if required {
+			<select class="min-h-11 w-full border border-brand-line bg-brand-surface px-3 text-sm font-medium normal-case tracking-normal text-brand-ink outline-none transition focus:border-brand-orange focus:ring-2 focus:ring-brand-orange/15 dark:border-brand-dark-line dark:bg-brand-deep dark:text-white" name={ name } required>
+				<option value="">Selecione</option>
+				for _, option := range options {
+					if value == option.Value {
+						<option value={ option.Value } selected>{ option.Label }</option>
+					} else {
+						<option value={ option.Value }>{ option.Label }</option>
+					}
+				}
+			</select>
+		} else {
+			<select class="min-h-11 w-full border border-brand-line bg-brand-surface px-3 text-sm font-medium normal-case tracking-normal text-brand-ink outline-none transition focus:border-brand-orange focus:ring-2 focus:ring-brand-orange/15 dark:border-brand-dark-line dark:bg-brand-deep dark:text-white" name={ name }>
+				<option value="">Selecione</option>
+				for _, option := range options {
+					if value == option.Value {
+						<option value={ option.Value } selected>{ option.Label }</option>
+					} else {
+						<option value={ option.Value }>{ option.Label }</option>
+					}
+				}
+			</select>
+		}
+	</label>
+}
+
+templ FormCheckboxField(name string, label string, description string, checked bool) {
+	<label class="group flex cursor-pointer items-start gap-3 border border-brand-line bg-brand-bg/60 px-4 py-3 normal-case tracking-normal transition duration-200 hover:border-brand-orange/50 hover:bg-brand-orange/[0.025] focus-within:border-brand-orange focus-within:ring-2 focus-within:ring-brand-orange/15 dark:border-brand-dark-line dark:bg-brand-sidebar-soft/45 dark:hover:border-brand-orange/60 dark:hover:bg-brand-orange/[0.04]">
+		if checked {
+			<input class="peer sr-only" type="checkbox" name={ name } value="1" checked/>
+		} else {
+			<input class="peer sr-only" type="checkbox" name={ name } value="1"/>
+		}
+		<span class="mt-0.5 grid size-5 shrink-0 place-items-center border border-brand-line bg-brand-surface text-transparent transition duration-200 group-hover:border-brand-orange/60 peer-focus-visible:border-brand-orange peer-focus-visible:ring-2 peer-focus-visible:ring-brand-orange/20 peer-checked:border-brand-orange peer-checked:bg-brand-orange peer-checked:text-white [&>svg]:size-[13px] [&>svg]:shrink-0 [&>svg]:scale-75 [&>svg]:opacity-0 [&>svg]:transition [&>svg]:duration-150 peer-checked:[&>svg]:scale-100 peer-checked:[&>svg]:opacity-100 dark:border-brand-dark-line dark:bg-brand-deep dark:peer-checked:border-brand-orange dark:peer-checked:bg-brand-orange" aria-hidden="true">
+			@lucide.Check(templ.Attributes{"class": "block"})
+		</span>
+		<span class="min-w-0 flex-1">
+			<strong class="block text-xs font-semibold text-brand-ink transition-colors group-hover:text-brand-orange dark:text-slate-100">{ label }</strong>
+			if description != "" {
+				<span class="mt-1 block text-[11px] leading-5 text-brand-muted dark:text-brand-dark-muted">{ description }</span>
+			}
+		</span>
+	</label>
+}
+
+templ FormMessage(message string, hasError bool) {
+	if message != "" {
+		if hasError {
+			<div class="border-l-[3px] border-red-500 bg-red-50 px-4 py-3 text-xs font-medium text-red-800 dark:bg-red-950/30 dark:text-red-200" role="alert">{ message }</div>
+		} else {
+			<div class="border-l-[3px] border-brand-orange bg-brand-bg px-4 py-3 text-xs font-medium text-brand-ink dark:bg-brand-sidebar-soft dark:text-slate-100" role="status">{ message }</div>
+		}
+	}
+}
+
+templ FormActions(submitLabel string) {
+	<div class="flex flex-col-reverse gap-2 border-t border-brand-line pt-4 dark:border-brand-dark-line sm:flex-row sm:justify-end">
+		<button class="min-h-11 border border-brand-line px-4 text-xs font-extrabold text-brand-muted transition hover:border-brand-orange hover:text-brand-orange dark:border-brand-dark-line dark:text-brand-dark-muted" type="button" data-overlay-close>Cancelar</button>
+		<button class="min-h-11 bg-brand-orange px-5 text-xs font-extrabold text-white transition hover:bg-brand-orange-hover focus:outline-none focus:ring-2 focus:ring-brand-orange/30" type="submit">{ submitLabel }</button>
+	</div>
+}

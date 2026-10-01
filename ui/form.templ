@@ -1,0 +1,48 @@
+package ui
+
+templ TextInput(name string, label string, value string, inputType string, autocomplete string) {
+	<label class="grid gap-1.5 text-[11px] font-extrabold uppercase tracking-[0.06em] text-brand-muted dark:text-brand-dark-muted">
+		<span>{ label }</span>
+		<input
+			class="min-h-11 w-full border border-brand-line bg-brand-surface px-3 text-sm text-brand-ink outline-none transition focus:border-brand-orange focus:ring-3 focus:ring-brand-orange/10 dark:border-brand-dark-line dark:bg-brand-dark-surface dark:text-slate-100 dark:focus:border-brand-orange"
+			type={ inputType }
+			name={ name }
+			value={ value }
+			autocomplete={ autocomplete }
+			required
+		/>
+	</label>
+}
+
+templ SearchInput(id string, name string, label string, placeholder string, disabled bool) {
+	<div>
+		<label class="mb-1.5 block text-[10px] font-bold uppercase tracking-[0.08em] text-brand-muted dark:text-brand-dark-muted" for={ id }>{ label }</label>
+		if disabled {
+			<input class="h-11 w-full border border-brand-line bg-brand-surface px-3.5 text-sm text-brand-ink outline-none transition placeholder:text-brand-muted/70 focus:border-brand-orange focus:ring-1 focus:ring-brand-orange dark:border-brand-dark-line dark:bg-brand-deep dark:text-white" id={ id } name={ name } type="search" minlength="2" maxlength="120" autocomplete="off" placeholder={ placeholder } disabled/>
+		} else {
+			<input class="h-11 w-full border border-brand-line bg-brand-surface px-3.5 text-sm text-brand-ink outline-none transition placeholder:text-brand-muted/70 focus:border-brand-orange focus:ring-1 focus:ring-brand-orange dark:border-brand-dark-line dark:bg-brand-deep dark:text-white" id={ id } name={ name } type="search" minlength="2" maxlength="120" autocomplete="off" placeholder={ placeholder }/>
+		}
+	</div>
+}
+
+templ ColorField(name string, label string, value string) {
+	<label class="grid gap-1.5 text-[11px] font-extrabold uppercase tracking-[0.06em] text-brand-muted dark:text-brand-dark-muted">
+		<span>{ label }</span>
+		<div class="flex min-h-11 items-center gap-3 border border-brand-line bg-brand-surface px-3 dark:border-brand-dark-line dark:bg-brand-dark-surface">
+			<input class="h-7 w-12 cursor-pointer border-0 bg-transparent p-0" type="color" name={ name } value={ value } required/>
+			<span class="font-mono text-xs font-medium normal-case tracking-normal text-brand-ink dark:text-slate-100">{ value }</span>
+		</div>
+	</label>
+}
+
+templ SubmitButton(label string, disabled bool) {
+	if disabled {
+		<button class="min-h-11 w-full cursor-not-allowed bg-brand-orange px-4 text-xs font-extrabold text-white opacity-55 sm:w-auto" type="submit" disabled aria-disabled="true">{ label }</button>
+	} else {
+		<button class="min-h-11 w-full bg-brand-orange px-4 text-xs font-extrabold text-white transition hover:bg-brand-orange-hover focus:outline-none focus:ring-2 focus:ring-brand-orange/30 sm:w-auto" type="submit">{ label }</button>
+	}
+}
+
+templ PrimaryButton(label string) {
+	@SubmitButton(label, false)
+}

@@ -1,0 +1,16 @@
+package ui
+
+import "strconv"
+
+templ ListSummary(title string, visible int, total int, filtered bool) {
+	<div class="mb-3 flex flex-wrap items-end justify-between gap-3">
+		<h2 class="text-sm font-semibold text-brand-ink dark:text-slate-100">{ title }</h2>
+		<div class="text-right text-[10px] font-semibold text-brand-muted dark:text-brand-dark-muted">
+			if filtered {
+				<span>{ strconv.Itoa(visible) } encontrados · { strconv.Itoa(total) } cadastrados</span>
+			} else {
+				<span>{ strconv.Itoa(total) } cadastrados</span>
+			}
+		</div>
+	</div>
+}
