@@ -39,3 +39,9 @@ cargoweb-cadmin ───────► cargoweb-ccomum
 `cargoweb-ccomum` não deve importar `cargoweb-cadmin` nem módulos de negócio.
 
 A base compartilhada deve permanecer pequena, estável e previsível.
+
+## Templ em módulo distribuído
+
+Arquivos `.templ` são a fonte de edição. Como este módulo é consumido via `go mod`, componentes Templ exportados devem ter seus `*_templ.go` gerados e versionados antes de publicar a versão consumida por outros repositórios.
+
+Nunca editar `*_templ.go` manualmente.
