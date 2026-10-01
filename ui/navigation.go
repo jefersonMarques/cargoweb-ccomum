@@ -25,3 +25,11 @@ func moduleGetFormAttributes(action string) templ.Attributes {
 		"hx-sync": "#module-content:replace",
 	}
 }
+
+func ModuleNavigationAttributes(href string) templ.Attributes {
+	return moduleNavigationAttributes(href)
+}
+
+func ModuleGetFormAttributes(action string) templ.Attributes {
+	return moduleGetFormAttributes(action)
+}
