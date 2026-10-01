@@ -1,0 +1,13 @@
+package ui
+
+templ DataGridPrimaryCell(key string, href string, enabled bool) {
+	<td class="px-4 py-3 align-middle text-xs text-brand-ink dark:text-slate-100" data-grid-cell={ key }>
+		if enabled {
+			<a class="block text-brand-ink transition hover:text-brand-orange focus:outline-none focus:text-brand-orange dark:text-slate-100" href={ href } { moduleNavigationAttributes(href)... }>
+				{ children... }
+			</a>
+		} else {
+			{ children... }
+		}
+	</td>
+}

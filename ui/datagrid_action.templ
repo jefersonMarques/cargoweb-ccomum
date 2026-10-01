@@ -1,0 +1,19 @@
+package ui
+
+import "github.com/dimmerz92/go-icons/lucide"
+
+templ DataGridPrimaryAction(label string, href string, overlayID string) {
+	<div class="mb-3 flex justify-end">
+		if overlayID != "" {
+			<button class="inline-flex min-h-10 items-center gap-2 bg-brand-orange px-4 text-[10px] font-extrabold uppercase tracking-[0.08em] text-white transition hover:bg-brand-orange-hover focus:outline-none focus:ring-2 focus:ring-brand-orange/30" type="button" data-overlay-open={ overlayID }>
+				@lucide.Plus(templ.Attributes{"width": "15", "height": "15", "stroke-width": "1.8", "aria-hidden": "true"})
+				<span>{ label }</span>
+			</button>
+		} else if href != "" {
+			<a class="inline-flex min-h-10 items-center gap-2 bg-brand-orange px-4 text-[10px] font-extrabold uppercase tracking-[0.08em] text-white transition hover:bg-brand-orange-hover focus:outline-none focus:ring-2 focus:ring-brand-orange/30" href={ href } { moduleNavigationAttributes(href)... }>
+				@lucide.Plus(templ.Attributes{"width": "15", "height": "15", "stroke-width": "1.8", "aria-hidden": "true"})
+				<span>{ label }</span>
+			</a>
+		}
+	</div>
+}

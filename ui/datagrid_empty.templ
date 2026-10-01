@@ -1,0 +1,20 @@
+package ui
+
+import (
+	"strconv"
+
+	"github.com/dimmerz92/go-icons/lucide"
+	"github.com/jefersonMarques/cargoweb-ccomum/datagrid"
+)
+
+templ DataGridEmptyRow(definition datagrid.Definition, title string, description string) {
+	<tr>
+		<td class="px-5 py-10 text-center" colspan={ strconv.Itoa(len(definition.Columns) + 1) }>
+			<div class="mx-auto grid max-w-sm justify-items-center gap-2 text-brand-muted dark:text-brand-dark-muted">
+				@lucide.SearchX(templ.Attributes{"width": "22", "height": "22", "stroke-width": "1.6", "aria-hidden": "true"})
+				<strong class="text-xs font-semibold text-brand-ink dark:text-slate-100">{ title }</strong>
+				<p class="text-[11px] leading-5">{ description }</p>
+			</div>
+		</td>
+	</tr>
+}
