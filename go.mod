@@ -1,0 +1,8 @@
+module github.com/jefersonMarques/cargoweb-ccomum
+
+go 1.27.0
+
+require (
+	github.com/a-h/templ v0.3.1020
+	github.com/dimmerz92/go-icons v0.56.0
+)
