@@ -1,0 +1,65 @@
+package ui
+
+import "github.com/dimmerz92/go-icons/lucide"
+
+templ Modal(id string, title string, description string, size ModalSize, openOnLoad bool) {
+	<div
+		class="fixed inset-0 z-[100]"
+		data-overlay
+		data-overlay-kind="modal"
+		data-overlay-size={ string(size) }
+		data-overlay-state="closed"
+		data-overlay-open-on-load={ boolString(openOnLoad) }
+		id={ id }
+		aria-hidden="true"
+		hidden
+	>
+		<button class="absolute inset-0 bg-brand-deep/55 backdrop-blur-[1px]" type="button" data-overlay-backdrop aria-label="Fechar"></button>
+		<div class="relative flex min-h-full items-center justify-center p-4 sm:p-6">
+			<section class="relative flex max-h-[calc(100vh-2rem)] flex-col border border-brand-line bg-brand-surface shadow-2xl dark:border-brand-dark-line dark:bg-brand-dark-surface" role="dialog" aria-modal="true" aria-labelledby={ id + "-title" } tabindex="-1" data-overlay-panel>
+				@OverlayHeader(id, title, description)
+				<div class="min-h-0 overflow-y-auto px-5 py-5 sm:px-6">
+					{ children... }
+				</div>
+			</section>
+		</div>
+	</div>
+}
+
+templ SlideModal(id string, title string, description string, size SlideModalSize, openOnLoad bool) {
+	<div
+		class="fixed inset-0 z-[100]"
+		data-overlay
+		data-overlay-kind="slide"
+		data-overlay-size={ string(size) }
+		data-overlay-state="closed"
+		data-overlay-open-on-load={ boolString(openOnLoad) }
+		id={ id }
+		aria-hidden="true"
+		hidden
+	>
+		<button class="absolute inset-0 bg-brand-deep/40 backdrop-blur-[1px]" type="button" data-overlay-backdrop aria-label="Fechar"></button>
+		<div class="relative flex min-h-full justify-end">
+			<section class="flex min-h-full flex-col border-l border-brand-line bg-brand-surface shadow-2xl dark:border-brand-dark-line dark:bg-brand-dark-surface" role="dialog" aria-modal="true" aria-labelledby={ id + "-title" } tabindex="-1" data-overlay-panel>
+				@OverlayHeader(id, title, description)
+				<div class="min-h-0 flex-1 overflow-y-auto px-5 py-5 sm:px-6">
+					{ children... }
+				</div>
+			</section>
+		</div>
+	</div>
+}
+
+templ OverlayHeader(id string, title string, description string) {
+	<header class="flex shrink-0 items-start gap-4 border-b border-brand-line px-5 py-4 dark:border-brand-dark-line sm:px-6">
+		<div class="min-w-0 flex-1">
+			<h2 class="text-base font-semibold text-brand-ink dark:text-slate-100" id={ id + "-title" }>{ title }</h2>
+			if description != "" {
+				<p class="mt-1 text-xs leading-5 text-brand-muted dark:text-brand-dark-muted">{ description }</p>
+			}
+		</div>
+		<button class="grid size-10 shrink-0 place-items-center border border-brand-line text-brand-muted transition hover:border-brand-orange hover:text-brand-orange focus:outline-none focus:ring-2 focus:ring-brand-orange/30 dark:border-brand-dark-line dark:text-brand-dark-muted" type="button" data-overlay-close aria-label="Fechar">
+			@lucide.X(templ.Attributes{"width": "17", "height": "17", "stroke-width": "1.8", "aria-hidden": "true"})
+		</button>
+	</header>
+}

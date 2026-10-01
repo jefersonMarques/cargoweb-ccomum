@@ -1,0 +1,25 @@
+package ui
+
+import "github.com/dimmerz92/go-icons/lucide"
+
+templ BackLink(href string, label string) {
+	<a class="mb-4 inline-flex items-center gap-2 text-[11px] font-semibold text-brand-muted transition hover:text-brand-orange dark:text-brand-dark-muted dark:hover:text-brand-orange" href={ href } { moduleNavigationAttributes(href)... }>
+		@lucide.ArrowLeft(templ.Attributes{"width": "15", "height": "15", "stroke-width": "1.8", "aria-hidden": "true"})
+		<span>{ label }</span>
+	</a>
+}
+
+templ ActionLink(href string, label string) {
+	<a class="inline-flex min-h-9 items-center gap-2 border border-brand-line px-3 text-[10px] font-bold text-brand-ink transition hover:border-brand-orange hover:text-brand-orange dark:border-brand-dark-line dark:text-slate-100 dark:hover:border-brand-orange dark:hover:text-brand-orange" href={ href }>
+		<span>{ label }</span>
+		@lucide.ArrowRight(templ.Attributes{"width": "14", "height": "14", "stroke-width": "1.8", "aria-hidden": "true"})
+	</a>
+}
+
+
+templ PrimaryNavigationLink(href string, label string) {
+	<a class="inline-flex min-h-11 items-center justify-center gap-2 bg-brand-orange px-5 text-xs font-extrabold text-white transition hover:bg-brand-orange-hover focus:outline-none focus:ring-2 focus:ring-brand-orange/30" href={ href } { moduleNavigationAttributes(href)... }>
+		@lucide.Plus(templ.Attributes{"width": "15", "height": "15", "stroke-width": "2", "aria-hidden": "true"})
+		<span>{ label }</span>
+	</a>
+}

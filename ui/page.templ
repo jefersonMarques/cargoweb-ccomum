@@ -1,0 +1,50 @@
+package ui
+
+templ PageHeader(section string, title string, description string) {
+	<header class="mb-6">
+		if section != "" {
+			<span class="text-[9px] font-extrabold uppercase tracking-[0.13em] text-brand-orange">{ section }</span>
+		}
+		<h1 class="mt-1 text-[clamp(29px,3.4vw,44px)] font-semibold leading-[1.05] tracking-[-0.045em] text-brand-ink dark:text-white">{ title }</h1>
+		if description != "" {
+			<p class="mt-2 max-w-3xl text-[13px] leading-[1.6] text-brand-muted dark:text-brand-dark-muted">{ description }</p>
+		}
+	</header>
+}
+
+templ SurfacePanel() {
+	<section class="border border-brand-line bg-brand-surface p-5 shadow-[0_4px_18px_rgba(20,42,56,0.035)] dark:border-brand-dark-line dark:bg-brand-dark-surface sm:p-6">
+		{ children... }
+	</section>
+}
+
+templ PanelLead(title string, description string) {
+	<div class="flex items-start gap-3">
+		<div class="grid h-10 w-10 shrink-0 place-items-center border border-brand-line bg-brand-bg text-brand-orange dark:border-brand-dark-line dark:bg-brand-sidebar-soft">
+			{ children... }
+		</div>
+		<div class="min-w-0">
+			<h2 class="text-sm font-semibold tracking-[-0.015em]">{ title }</h2>
+			if description != "" {
+				<p class="mt-1 text-xs leading-5 text-brand-muted dark:text-brand-dark-muted">{ description }</p>
+			}
+		</div>
+	</div>
+}
+
+templ EmptyState(title string, description string) {
+	<section class="mt-4 border border-dashed border-brand-line bg-brand-surface px-5 py-12 text-center dark:border-brand-dark-line dark:bg-brand-dark-surface">
+		<div class="mx-auto grid h-12 w-12 place-items-center border border-brand-line bg-brand-bg text-brand-muted dark:border-brand-dark-line dark:bg-brand-sidebar-soft dark:text-brand-dark-muted">
+			{ children... }
+		</div>
+		<h2 class="mt-4 text-sm font-semibold">{ title }</h2>
+		<p class="mx-auto mt-1.5 max-w-xl text-xs leading-5 text-brand-muted dark:text-brand-dark-muted">{ description }</p>
+	</section>
+}
+
+templ InfoPanel(title string, description string) {
+	@SurfacePanel() {
+		<h2 class="text-sm font-semibold tracking-[-0.015em]">{ title }</h2>
+		<p class="mt-2 text-xs leading-5 text-brand-muted dark:text-brand-dark-muted">{ description }</p>
+	}
+}
