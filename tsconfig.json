@@ -1,0 +1,20 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "ESNext",
+    "lib": [
+      "ES2022",
+      "DOM",
+      "DOM.Iterable"
+    ],
+    "strict": true,
+    "noEmit": true,
+    "noUncheckedIndexedAccess": true,
+    "useDefineForClassFields": true,
+    "forceConsistentCasingInFileNames": true,
+    "moduleResolution": "Bundler"
+  },
+  "include": [
+    "assets/ts/**/*.ts"
+  ]
+}
