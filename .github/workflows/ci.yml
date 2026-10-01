@@ -18,13 +18,14 @@ jobs:
         with:
           go-version: '1.27.1'
           cache: false
-      - run: go mod download
+      - run: go mod tidy
       - run: go run github.com/a-h/templ/cmd/templ@v0.3.1020 generate
       - name: Commit generated Templ files
         if: github.event_name == 'push'
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add go.mod go.sum
           find . -name '*_templ.go' -print0 | xargs -0 git add --
           if ! git diff --cached --quiet; then
             git commit -m "build: generate templ sources"
