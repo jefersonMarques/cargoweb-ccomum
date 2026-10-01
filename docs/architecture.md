@@ -46,3 +46,9 @@ cargoweb-cadmin ───────► cargoweb-ccomum
 Consumidores devem referenciar versão, tag ou pseudo-versão válida em `go.mod` e registrar a resolução em `go.sum`.
 
 Para desenvolvimento simultâneo, usar `go.work` local.
+
+## Distribuição de componentes Templ
+
+Quando o módulo exportar componentes Templ, o arquivo `.templ` permanece como fonte autoritativa, mas o `*_templ.go` correspondente deve ser gerado e versionado. O Go não executa geração de código automaticamente ao baixar uma dependência pelo `go mod`.
+
+Consumidores não devem gerar código dentro do module cache.
