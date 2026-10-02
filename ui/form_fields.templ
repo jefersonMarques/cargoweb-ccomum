@@ -1,7 +1,5 @@
 package ui
 
-import "github.com/dimmerz92/go-icons/lucide"
-
 templ FormSection(title string, description string) {
 	<section class="grid gap-4">
 		<div class="border-b border-brand-line pb-3 dark:border-brand-dark-line">
@@ -88,8 +86,8 @@ templ FormCheckboxField(name string, label string, description string, checked b
 		} else {
 			<input class="peer sr-only" type="checkbox" name={ name } value="1"/>
 		}
-		<span class="mt-0.5 grid size-5 shrink-0 place-items-center border border-brand-line bg-brand-surface text-transparent transition duration-200 group-hover:border-brand-orange/60 peer-focus-visible:border-brand-orange peer-focus-visible:ring-2 peer-focus-visible:ring-brand-orange/20 peer-checked:border-brand-orange peer-checked:bg-brand-orange peer-checked:text-white [&>svg]:size-[13px] [&>svg]:shrink-0 [&>svg]:scale-75 [&>svg]:opacity-0 [&>svg]:transition [&>svg]:duration-150 peer-checked:[&>svg]:scale-100 peer-checked:[&>svg]:opacity-100 dark:border-brand-dark-line dark:bg-brand-deep dark:peer-checked:border-brand-orange dark:peer-checked:bg-brand-orange" aria-hidden="true">
-			@lucide.Check(templ.Attributes{"class": "block"})
+		<span class="mt-0.5 grid size-5 shrink-0 place-items-center border border-brand-line bg-brand-surface transition duration-200 group-hover:border-brand-orange/60 peer-focus-visible:border-brand-orange peer-focus-visible:ring-2 peer-focus-visible:ring-brand-orange/20 peer-checked:border-brand-orange [&>span]:size-2.5 [&>span]:bg-brand-muted/35 [&>span]:transition-colors [&>span]:duration-150 peer-checked:[&>span]:bg-brand-orange dark:border-brand-dark-line dark:bg-brand-dark-surface dark:[&>span]:bg-brand-dark-muted/40 dark:peer-checked:[&>span]:bg-brand-orange" aria-hidden="true">
+			<span></span>
 		</span>
 		<span class="min-w-0 flex-1">
 			<strong class="block text-xs font-semibold text-brand-ink transition-colors group-hover:text-brand-orange dark:text-slate-100">{ label }</strong>
@@ -98,6 +96,25 @@ templ FormCheckboxField(name string, label string, description string, checked b
 			}
 		</span>
 	</label>
+}
+
+templ FormRadioGroup(name string, label string, value string, options []FormOption) {
+	<fieldset>
+		<legend class="mb-2 text-[10px] font-extrabold uppercase tracking-[0.07em] text-brand-muted dark:text-brand-dark-muted">{ label }</legend>
+		<div class="grid gap-2">
+			for _, option := range options {
+				<label class="group flex min-h-10 cursor-pointer items-center gap-3 border border-brand-line bg-brand-surface px-3 text-[11px] font-semibold text-brand-ink transition hover:border-brand-orange/50 hover:bg-brand-orange/[0.02] focus-within:border-brand-orange focus-within:ring-2 focus-within:ring-brand-orange/15 dark:border-brand-dark-line dark:bg-brand-dark-surface dark:text-slate-100">
+					if option.Value == value {
+						<input class="peer sr-only" type="radio" name={ name } value={ option.Value } checked/>
+					} else {
+						<input class="peer sr-only" type="radio" name={ name } value={ option.Value }/>
+					}
+					<span class="grid size-5 shrink-0 border-2 border-brand-line bg-brand-bg transition duration-200 peer-focus-visible:ring-2 peer-focus-visible:ring-brand-orange/20 peer-checked:border-brand-orange-hover peer-checked:bg-brand-orange dark:border-brand-dark-line dark:bg-brand-sidebar-soft dark:peer-checked:border-white/70 dark:peer-checked:bg-brand-orange" aria-hidden="true"></span>
+					<span>{ option.Label }</span>
+				</label>
+			}
+		</div>
+	</fieldset>
 }
 
 templ FormMessage(message string, hasError bool) {
