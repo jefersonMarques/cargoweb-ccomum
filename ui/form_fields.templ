@@ -111,7 +111,7 @@ templ RadioControl(name string, value string, checked bool) {
 		} else {
 			<input class="peer absolute inset-0 z-10 size-full cursor-pointer opacity-0" type="radio" name={ name } value={ value }/>
 		}
-		<span class="grid size-5 place-items-center border border-brand-line bg-brand-surface transition duration-200 peer-focus-visible:border-brand-orange peer-focus-visible:ring-2 peer-focus-visible:ring-brand-orange/20 [&>span]:size-2.5 [&>span]:border [&>span]:border-brand-line [&>span]:bg-transparent [&>span]:transition [&>span]:duration-150 peer-checked:[&>span]:border-brand-orange peer-checked:[&>span]:bg-brand-orange dark:border-brand-dark-line dark:bg-brand-dark-surface dark:[&>span]:border-brand-dark-line dark:peer-checked:[&>span]:border-brand-orange dark:peer-checked:[&>span]:bg-brand-orange" aria-hidden="true">
+		<span class="grid size-5 place-items-center border border-brand-line bg-brand-surface transition duration-200 peer-focus-visible:border-brand-orange peer-focus-visible:ring-2 peer-focus-visible:ring-brand-orange/20 peer-checked:border-brand-orange [&>span]:size-2.5 [&>span]:border [&>span]:border-brand-line [&>span]:bg-transparent [&>span]:transition [&>span]:duration-150 peer-checked:[&>span]:border-brand-orange peer-checked:[&>span]:bg-brand-orange dark:border-brand-dark-line dark:bg-brand-dark-surface dark:peer-checked:border-brand-orange dark:[&>span]:border-brand-dark-line dark:peer-checked:[&>span]:border-brand-orange dark:peer-checked:[&>span]:bg-brand-orange" aria-hidden="true">
 			<span></span>
 		</span>
 	</span>
