@@ -53,6 +53,21 @@ Quando o módulo exportar componentes Templ, o arquivo `.templ` permanece como f
 
 Consumidores não devem gerar código dentro do module cache.
 
+## Primitives de formulário
+
+O package `ui` concentra controles de formulário neutros usados pelo host e pelos módulos, evitando implementações visuais locais para inputs equivalentes.
+
+Primitives disponíveis incluem:
+
+- campos de texto, busca e seleção;
+- checkbox e radio com estados visuais do design system;
+- campo numérico com descrição e estado desabilitado;
+- textarea;
+- área de seleção e drag-and-drop de arquivos;
+- mensagens e ações de formulário.
+
+Componentes de composição específicos de domínio, como matrizes de regras, cards de PGR ou fluxos de recorte de logo, permanecem no módulo responsável até existir reutilização concreta que justifique nova abstração.
+
 ## Assets frontend compartilhados
 
 Assets TypeScript comprovadamente multi-módulo pertencem ao `cargoweb-ccomum`.
