@@ -96,8 +96,8 @@ templ CheckboxControl(name string, value string, checked bool, disabled bool) {
 				<input class="peer absolute inset-0 z-10 size-full cursor-pointer opacity-0" type="checkbox" name={ name } value={ value }/>
 			}
 		}
-		<span class="grid size-5 place-items-center border border-brand-line bg-brand-surface text-transparent transition duration-200 peer-focus-visible:border-brand-orange peer-focus-visible:ring-2 peer-focus-visible:ring-brand-orange/20 peer-disabled:opacity-45 peer-checked:border-brand-orange peer-checked:bg-brand-orange peer-checked:text-white dark:border-brand-dark-line dark:bg-brand-dark-surface dark:peer-checked:border-brand-orange dark:peer-checked:bg-brand-orange" aria-hidden="true">
-			@lucide.Check(templ.Attributes{"width": "13", "height": "13", "stroke-width": "2.4", "class": "block opacity-0 scale-75 transition duration-150 peer-checked:opacity-100 peer-checked:scale-100"})
+		<span class="grid size-5 place-items-center border border-brand-line bg-brand-surface text-transparent transition duration-200 peer-focus-visible:border-brand-orange peer-focus-visible:ring-2 peer-focus-visible:ring-brand-orange/20 peer-disabled:opacity-45 peer-checked:border-brand-orange peer-checked:bg-brand-orange peer-checked:text-white [&>svg]:block [&>svg]:size-[13px] [&>svg]:scale-75 [&>svg]:opacity-0 [&>svg]:transition [&>svg]:duration-150 peer-checked:[&>svg]:scale-100 peer-checked:[&>svg]:opacity-100 dark:border-brand-dark-line dark:bg-brand-dark-surface dark:peer-checked:border-brand-orange dark:peer-checked:bg-brand-orange" aria-hidden="true">
+			@lucide.Check(templ.Attributes{"width": "13", "height": "13", "stroke-width": "2.4", "aria-hidden": "true"})
 		</span>
 	</span>
 }
