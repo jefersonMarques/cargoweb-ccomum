@@ -1,4 +1,4 @@
 {
-  "selector": "[data-grid]",
+  "selector": "[data-grid], [data-file-drop]",
   "entry": "index.ts"
 }
