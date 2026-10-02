@@ -34,7 +34,7 @@ export function initializeFileDrops(root: ParentNode = document): void {
 		}
 
 		input.addEventListener("change", () => {
-			status.textContent = describeFiles(input.files ?? new DataTransfer().files);
+			status.textContent = input.files ? describeFiles(input.files) : "Arraste arquivos para esta área ou clique para selecionar.";
 		});
 
 		target.addEventListener("dragover", (event) => {
