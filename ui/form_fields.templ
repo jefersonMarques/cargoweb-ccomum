@@ -174,7 +174,7 @@ templ FormFileDropField(id string, name string, label string, title string, desc
 		if label != "" {
 			<label class="text-[10px] font-extrabold uppercase tracking-[0.07em] text-brand-muted dark:text-brand-dark-muted" for={ id }>{ label }</label>
 		}
-		<label class="group flex min-h-44 cursor-pointer flex-col items-center justify-center border border-dashed border-brand-line bg-brand-bg px-6 py-8 text-center transition hover:border-brand-orange focus-within:border-brand-orange focus-within:ring-2 focus-within:ring-brand-orange/15 dark:border-brand-dark-line dark:bg-brand-sidebar-soft/45" for={ id }>
+		<label class="group flex min-h-44 cursor-pointer flex-col items-center justify-center border border-dashed border-brand-line bg-brand-bg px-6 py-8 text-center transition hover:border-brand-orange focus-within:border-brand-orange focus-within:ring-2 focus-within:ring-brand-orange/15 data-[drop-active=true]:border-brand-orange data-[drop-active=true]:bg-brand-orange/[0.04] dark:border-brand-dark-line dark:bg-brand-sidebar-soft/45" for={ id }>
 			<span class="grid size-12 place-items-center border border-brand-line bg-brand-surface text-brand-orange transition group-hover:border-brand-orange/50 dark:border-brand-dark-line dark:bg-brand-dark-surface">
 				@lucide.UploadCloud(templ.Attributes{"width": "22", "height": "22", "stroke-width": "1.6", "aria-hidden": "true"})
 			</span>
