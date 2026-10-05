@@ -1,47 +1,63 @@
 # CargoWeb Comum
 
-Base compartilhada multi-módulo do CargoWeb.
+Base técnica compartilhada do CargoWeb.
 
-Este repositório contém somente código reutilizável por dois ou mais módulos ou pelo host e módulos, evitando dependências circulares entre repositórios de negócio.
+Este repositório contém somente código neutro e reutilizável entre contextos ou aplicações CargoWeb.
 
-Módulo Go:
+Módulo Go de desenvolvimento:
 
 ```text
 github.com/jefersonMarques/cargoweb-ccomum
 ```
 
-## Regra de responsabilidade
+A origem final permanece no namespace canônico do Bitbucket.
 
-Entram aqui apenas abstrações e componentes comprovadamente multi-módulo, por exemplo:
+## Responsabilidades
+
+Entram aqui capacidades técnicas compartilhadas, por exemplo:
 
 - DataGrid genérico;
-- primitives reutilizáveis de formulário;
-- modal, painel, status e elementos visuais genéricos;
-- contratos técnicos estáveis que não pertençam a um domínio de negócio.
+- primitives reutilizáveis de formulário e UI;
+- formatação de documentos brasileiros;
+- comportamentos genéricos de entrada e validação para documento, telefone, CEP, UF e e-mail;
+- contratos técnicos estáveis sem regra de negócio.
 
 Não entram aqui:
 
 - autenticação e sessão do host;
-- shell administrativo, sidebar e topbar;
-- regras de negócio;
-- handlers ou rotas específicas de módulos;
-- organizações, unidades, usuários organizacionais, whitelabel ou PGR;
-- infraestrutura criada apenas para um consumidor.
+- shell administrativo;
+- regras de Cliente, Usuário, Whitelabel, PGR ou outros contextos;
+- handlers e rotas de negócio;
+- código criado apenas para antecipar uma reutilização futura.
 
 ## Direção de dependências
 
 ```text
 cargoweb-cadmin ───────► cargoweb-ccomum
-       │
-       └───────────────► cargoweb-centidade ─────► cargoweb-ccomum
 ```
 
-`cargoweb-ccomum` não deve importar `cargoweb-cadmin` nem módulos de negócio.
+O `cargoweb-ccomum` não importa o host nem áreas de negócio.
 
 A base compartilhada deve permanecer pequena, estável e previsível.
 
+## Documentos brasileiros
+
+O pacote `brdoc` concentra capacidades neutras de documentos brasileiros usadas pelo backend.
+
+Novas validações e formatações compartilhadas de documentos devem evoluir nesse pacote quando não pertencerem a uma regra específica de negócio.
+
+## Frontend compartilhado
+
+`assets/ts` contém comportamentos reutilizáveis carregados pelo host.
+
+Os comportamentos genéricos de formulário ficam em `assets/ts/forms`.
+
+Comportamentos que conheçam um domínio específico permanecem no domínio consumidor.
+
 ## Templ em módulo distribuído
 
-Arquivos `.templ` são a fonte de edição. Como este módulo é consumido via `go mod`, componentes Templ exportados devem ter seus `*_templ.go` gerados e versionados antes de publicar a versão consumida por outros repositórios.
+Arquivos `.templ` são a fonte de edição.
+
+Como este módulo é consumido via `go mod`, componentes Templ exportados devem ter seus `*_templ.go` gerados e versionados antes de publicar uma versão.
 
 Nunca editar `*_templ.go` manualmente.
