@@ -1,4 +1,4 @@
 {
-  "selector": "[data-grid]",
+  "selector": "[data-grid], input[data-input-behavior], input[name=\"unique_id\"], input[name=\"phone\"], input[name=\"postal_code\"], input[name=\"state\"], input[type=\"email\"]",
   "entry": "index.ts"
 }
