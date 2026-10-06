@@ -20,6 +20,7 @@ Entram aqui capacidades técnicas compartilhadas, por exemplo:
 - primitives reutilizáveis de formulário e UI;
 - formatação de documentos brasileiros;
 - consulta técnica de CEP brasileiro via ViaCEP;
+- cliente HTTP compartilhado para integrações internas autenticadas;
 - comportamentos genéricos de entrada e validação para documento, telefone, CEP, UF e e-mail;
 - contratos técnicos estáveis sem regra de negócio.
 
