@@ -19,6 +19,7 @@ Entram aqui capacidades técnicas compartilhadas, por exemplo:
 - DataGrid genérico;
 - primitives reutilizáveis de formulário e UI;
 - formatação de documentos brasileiros;
+- consulta técnica de CEP brasileiro via ViaCEP;
 - comportamentos genéricos de entrada e validação para documento, telefone, CEP, UF e e-mail;
 - contratos técnicos estáveis sem regra de negócio.
 
