@@ -63,3 +63,28 @@ Arquivos `.templ` são a fonte de edição.
 Como este módulo é consumido via `go mod`, componentes Templ exportados devem ter seus `*_templ.go` gerados e versionados antes de publicar uma versão.
 
 Nunca editar `*_templ.go` manualmente.
+
+
+## API de integrações
+
+O pacote `integrationapi` concentra o transporte HTTP autenticado para a API de integrações.
+
+Para chamadas internas, o host fornece a URL base, organização e usuário de serviço. O cliente autentica em `auth/relogincargoweb`, mantém o Bearer somente em memória, renova antes da expiração quando possível e tenta autenticar novamente uma vez após HTTP 401.
+
+Exemplo:
+
+```go
+client, err := integrationapi.NewInternal(integrationapi.Config{
+	BaseURL: "https://integracao.exemplo/integracoes",
+	OrgID:   organizationID,
+	UserID:  userID,
+})
+if err != nil {
+	return err
+}
+
+var response MyResponse
+err = client.Call(ctx, http.MethodPost, "pessoas/v1/cnpj", request, &response)
+```
+
+O pacote não lê `.env` nem conhece configuração do host. Credenciais e endereços são injetados pelo consumidor.
