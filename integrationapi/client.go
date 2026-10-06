@@ -30,9 +30,9 @@ var (
 )
 
 type Config struct {
-	BaseURL string
-	OrgID   int64
-	UserID  int64
+	BaseURL          string
+	OrgID            int64
+	UserID           int64
 	Timeout          time.Duration
 	MaxResponseBytes int64
 }
@@ -50,10 +50,10 @@ func (err *HTTPError) Error() string {
 }
 
 type Client struct {
-	baseURL *url.URL
-	http    *http.Client
-	orgID   int64
-	userID  int64
+	baseURL          *url.URL
+	http             *http.Client
+	orgID            int64
+	userID           int64
 	maxResponseBytes int64
 
 	mu        sync.Mutex
