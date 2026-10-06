@@ -17,21 +17,24 @@ import (
 
 const (
 	internalLoginPath   = "auth/relogincargoweb"
-	defaultTimeout      = 10 * time.Second
-	expirationClockSkew = 30 * time.Second
-	maximumErrorBody    = 4 << 10
+	defaultTimeout       = 10 * time.Second
+	defaultResponseLimit = 8 << 20
+	expirationClockSkew  = 30 * time.Second
+	maximumErrorBody     = 4 << 10
 )
 
 var (
-	ErrInvalidConfig  = errors.New("invalid integration API config")
-	ErrAuthentication = errors.New("integration API authentication failed")
+	ErrInvalidConfig    = errors.New("invalid integration API config")
+	ErrAuthentication   = errors.New("integration API authentication failed")
+	ErrResponseTooLarge = errors.New("integration API response too large")
 )
 
 type Config struct {
 	BaseURL string
 	OrgID   int64
 	UserID  int64
-	Timeout time.Duration
+	Timeout          time.Duration
+	MaxResponseBytes int64
 }
 
 type HTTPError struct {
@@ -51,6 +54,7 @@ type Client struct {
 	http    *http.Client
 	orgID   int64
 	userID  int64
+	maxResponseBytes int64
 
 	mu        sync.Mutex
 	token     string
@@ -69,12 +73,18 @@ func NewInternal(config Config) (*Client, error) {
 		timeout = defaultTimeout
 	}
 
+	maxResponseBytes := config.MaxResponseBytes
+	if maxResponseBytes <= 0 {
+		maxResponseBytes = defaultResponseLimit
+	}
+
 	return &Client{
-		baseURL: baseURL,
-		http:    &http.Client{Timeout: timeout},
-		orgID:   config.OrgID,
-		userID:  config.UserID,
-		now:     time.Now,
+		baseURL:          baseURL,
+		http:             &http.Client{Timeout: timeout},
+		orgID:            config.OrgID,
+		userID:           config.UserID,
+		maxResponseBytes: maxResponseBytes,
+		now:              time.Now,
 	}, nil
 }
 
@@ -233,9 +243,17 @@ func (client *Client) send(ctx context.Context, method string, endpoint *url.URL
 	}
 	defer response.Body.Close()
 
-	responseBody, err := io.ReadAll(io.LimitReader(response.Body, maximumErrorBody+1))
+	limit := client.maxResponseBytes
+	if response.StatusCode < http.StatusOK || response.StatusCode >= http.StatusMultipleChoices {
+		limit = maximumErrorBody
+	}
+
+	responseBody, err := io.ReadAll(io.LimitReader(response.Body, limit+1))
 	if err != nil {
 		return 0, nil, err
+	}
+	if int64(len(responseBody)) > limit {
+		return 0, nil, ErrResponseTooLarge
 	}
 	return response.StatusCode, responseBody, nil
 }
