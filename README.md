@@ -88,3 +88,23 @@ err = client.Call(ctx, http.MethodPost, "pessoas/v1/cnpj", request, &response)
 ```
 
 O pacote não lê `.env` nem conhece configuração do host. Credenciais e endereços são injetados pelo consumidor.
+
+
+## Loading HTMX compartilhado
+
+O frontend compartilhado fornece um overlay de carregamento de tela inteira para requisições HTMX que representem operações automáticas com múltiplos campos.
+
+Para ativar, marque o elemento que dispara a requisição:
+
+```html
+<input
+  data-loading-overlay-trigger="true"
+  data-loading-overlay-title="Consultando dados"
+  data-loading-overlay-description="Aguarde enquanto os campos são atualizados..."
+  hx-get="/endpoint"
+/>
+```
+
+O overlay é criado uma única vez no navegador, suporta requisições concorrentes, respeita `prefers-reduced-motion` e é removido automaticamente ao concluir, falhar ou cancelar a requisição.
+
+Não usar o overlay global para interações instantâneas ou locais quando um estado de carregamento dentro do próprio componente representar melhor a operação.
