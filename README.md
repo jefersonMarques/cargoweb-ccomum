@@ -99,12 +99,11 @@ Para ativar, marque o elemento que dispara a requisição:
 ```html
 <input
   data-loading-overlay-trigger="true"
-  data-loading-overlay-title="Consultando dados"
-  data-loading-overlay-description="Aguarde enquanto os campos são atualizados..."
+  data-loading-overlay-message="Consultando dados..."
   hx-get="/endpoint"
 />
 ```
 
-O overlay é criado uma única vez no navegador, suporta requisições concorrentes, respeita `prefers-reduced-motion` e é removido automaticamente ao concluir, falhar ou cancelar a requisição.
+O overlay é criado uma única vez no navegador, usa o contorno animado da Viagate em formato compacto, aplica blur ao conteúdo de fundo, suporta requisições concorrentes, respeita `prefers-reduced-motion` e é removido automaticamente ao concluir, falhar ou cancelar a requisição.
 
 Não usar o overlay global para interações instantâneas ou locais quando um estado de carregamento dentro do próprio componente representar melhor a operação.
