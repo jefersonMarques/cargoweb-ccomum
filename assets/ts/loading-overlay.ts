@@ -142,7 +142,7 @@ function applyTheme(): void {
   const panel = overlay.querySelector<HTMLElement>("[data-loading-overlay-panel]");
   const message = overlay.querySelector<HTMLElement>("[data-loading-overlay-message]");
 
-  overlay.style.backgroundColor = dark ? "rgba(7, 24, 39, 0.14)" : "rgba(255, 255, 255, 0.16)";
+  overlay.style.backgroundColor = "transparent";
   if (panel) {
     panel.style.backgroundColor = dark ? "var(--color-brand-dark-surface)" : "var(--color-brand-surface)";
     panel.style.borderColor = dark ? "var(--color-brand-dark-line)" : "var(--color-brand-line)";
