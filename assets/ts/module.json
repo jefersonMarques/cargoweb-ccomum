@@ -1,4 +1,4 @@
 {
-  "selector": "[data-grid], input[data-input-behavior], input[name=\"unique_id\"], input[name=\"phone\"], input[name=\"postal_code\"], input[name=\"state\"], input[type=\"email\"]",
+  "selector": "[data-grid], input[data-input-behavior], input[name=\"unique_id\"], input[name=\"phone\"], input[name=\"postal_code\"], input[name=\"state\"], input[type=\"email\"], [data-loading-overlay-trigger]",
   "entry": "index.ts"
 }
