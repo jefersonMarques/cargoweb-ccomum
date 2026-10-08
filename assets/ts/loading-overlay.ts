@@ -39,7 +39,8 @@ function loadingTrigger(event: Event): HTMLElement | null {
 function createViagateLoadingMark(): SVGSVGElement {
   const svg = document.createElementNS(svgNamespace, "svg");
   svg.dataset.loadingOverlayMark = "";
-  svg.setAttribute("aria-label", "Viagate carregando");
+  svg.id = "viagate-premium";
+  svg.setAttribute("aria-label", "Viagate loading contour animation - Bem longo");
   svg.setAttribute("fill", "none");
   svg.setAttribute("height", "150");
   svg.setAttribute("role", "img");
@@ -47,12 +48,13 @@ function createViagateLoadingMark(): SVGSVGElement {
   svg.setAttribute("width", "150");
 
   const title = document.createElementNS(svgNamespace, "title");
-  title.textContent = "Viagate Loading";
+  title.textContent = "Viagate Loading — Bem longo";
   svg.append(title);
 
   loadingPaths = viagatePaths.map((definition) => {
     const path = document.createElementNS(svgNamespace, "path");
     path.dataset.loadingOverlayOutline = "";
+    path.setAttribute("class", "outline");
     path.setAttribute("d", definition);
     path.setAttribute("pathLength", "100");
     path.setAttribute("fill", "none");
