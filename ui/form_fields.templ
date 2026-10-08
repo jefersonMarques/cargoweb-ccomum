@@ -46,9 +46,9 @@ templ formTextField(name string, label string, value string, inputType string, a
 
 templ formTextFieldInput(name string, value string, inputType string, autocomplete string, placeholder string, required bool) {
 	if required {
-		<input class="min-h-11 w-full border border-brand-line bg-brand-surface px-3 text-sm font-medium normal-case tracking-normal text-brand-ink outline-none transition placeholder:text-brand-muted/60 focus:border-brand-orange focus:ring-2 focus:ring-brand-orange/15 dark:border-brand-dark-line dark:bg-brand-deep dark:text-white" type={ inputType } name={ name } value={ value } autocomplete={ autocomplete } placeholder={ placeholder } maxlength="160" required/>
+		<input class="min-h-11 w-full border border-brand-line bg-brand-surface px-3 text-sm font-medium normal-case tracking-normal text-brand-ink outline-none transition placeholder:text-brand-muted/60 focus:border-brand-orange focus:ring-2 focus:ring-brand-orange/15 dark:border-brand-dark-line dark:bg-brand-deep dark:text-white" type={ inputType } name={ name } value={ value } autocomplete="off" placeholder={ placeholder } maxlength="160" required/>
 	} else {
-		<input class="min-h-11 w-full border border-brand-line bg-brand-surface px-3 text-sm font-medium normal-case tracking-normal text-brand-ink outline-none transition placeholder:text-brand-muted/60 focus:border-brand-orange focus:ring-2 focus:ring-brand-orange/15 dark:border-brand-dark-line dark:bg-brand-deep dark:text-white" type={ inputType } name={ name } value={ value } autocomplete={ autocomplete } placeholder={ placeholder } maxlength="160"/>
+		<input class="min-h-11 w-full border border-brand-line bg-brand-surface px-3 text-sm font-medium normal-case tracking-normal text-brand-ink outline-none transition placeholder:text-brand-muted/60 focus:border-brand-orange focus:ring-2 focus:ring-brand-orange/15 dark:border-brand-dark-line dark:bg-brand-deep dark:text-white" type={ inputType } name={ name } value={ value } autocomplete="off" placeholder={ placeholder } maxlength="160"/>
 	}
 }
 
