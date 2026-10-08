@@ -107,3 +107,10 @@ Para ativar, marque o elemento que dispara a requisição:
 O overlay é criado uma única vez no navegador, usa o contorno animado da Viagate em formato compacto, aplica blur ao conteúdo de fundo, suporta requisições concorrentes, respeita `prefers-reduced-motion` e é removido automaticamente ao concluir, falhar ou cancelar a requisição.
 
 Não usar o overlay global para interações instantâneas ou locais quando um estado de carregamento dentro do próprio componente representar melhor a operação.
+
+
+## Sugestões nativas do navegador
+
+Os campos de formulário compartilhados usam `autocomplete="off"` por padrão.
+
+Sugestões, pesquisas assistidas e autocompletes de domínio devem ser implementados por componentes controlados pelo CargoWeb, em vez de depender do histórico/autofill nativo do navegador.
