@@ -4,8 +4,7 @@ type HtmxRequestDetail = {
 };
 
 type LoadingRequest = {
-  title: string;
-  description: string;
+  message: string;
 };
 
 const showDelayMilliseconds = 120;
@@ -42,10 +41,10 @@ function createViagateLoadingMark(): SVGSVGElement {
   svg.id = "viagate-premium";
   svg.setAttribute("aria-label", "Viagate loading contour animation - Bem longo");
   svg.setAttribute("fill", "none");
-  svg.setAttribute("height", "150");
+  svg.setAttribute("height", "36");
   svg.setAttribute("role", "img");
   svg.setAttribute("viewBox", "0 0 366 367");
-  svg.setAttribute("width", "150");
+  svg.setAttribute("width", "36");
 
   const title = document.createElementNS(svgNamespace, "title");
   title.textContent = "Viagate Loading — Bem longo";
@@ -59,7 +58,7 @@ function createViagateLoadingMark(): SVGSVGElement {
     path.setAttribute("pathLength", "100");
     path.setAttribute("fill", "none");
     path.setAttribute("stroke", "#FF8532");
-    path.setAttribute("stroke-width", "8");
+    path.setAttribute("stroke-width", "7");
     path.setAttribute("stroke-linecap", "round");
     path.setAttribute("stroke-linejoin", "round");
     path.setAttribute("stroke-dasharray", "78 100");
@@ -95,51 +94,37 @@ function mountOverlay(): HTMLDivElement {
     justifyContent: "center",
     padding: "24px",
     cursor: "progress",
-    backdropFilter: "blur(3px)",
+    backdropFilter: "blur(7px)",
+    WebkitBackdropFilter: "blur(7px)",
     boxSizing: "border-box",
   });
 
   const panel = document.createElement("div");
   panel.dataset.loadingOverlayPanel = "";
   Object.assign(panel.style, {
-    display: "grid",
-    justifyItems: "center",
+    display: "inline-flex",
+    alignItems: "center",
     gap: "10px",
-    width: "min(100%, 380px)",
-    padding: "22px 24px 24px",
+    maxWidth: "min(calc(100vw - 48px), 420px)",
+    padding: "10px 14px",
     borderWidth: "1px",
     borderStyle: "solid",
-    textAlign: "center",
     boxSizing: "border-box",
-    boxShadow: "0 20px 56px rgba(15, 23, 42, 0.20)",
+    boxShadow: "0 10px 30px rgba(15, 23, 42, 0.14)",
   });
 
   const mark = createViagateLoadingMark();
 
-  const copy = document.createElement("span");
-  Object.assign(copy.style, {
-    display: "grid",
-    gap: "4px",
+  const message = document.createElement("strong");
+  message.dataset.loadingOverlayMessage = "";
+  Object.assign(message.style, {
     minWidth: "0",
-  });
-
-  const title = document.createElement("strong");
-  title.dataset.loadingOverlayTitle = "";
-  Object.assign(title.style, {
-    fontSize: "13px",
+    fontSize: "12px",
     fontWeight: "700",
-    lineHeight: "1.3",
+    lineHeight: "1.35",
   });
 
-  const description = document.createElement("span");
-  description.dataset.loadingOverlayDescription = "";
-  Object.assign(description.style, {
-    fontSize: "11px",
-    lineHeight: "1.45",
-  });
-
-  copy.append(title, description);
-  panel.append(mark, copy);
+  panel.append(mark, message);
   root.append(panel);
   document.body.append(root);
 
@@ -155,19 +140,15 @@ function applyTheme(): void {
 
   const dark = document.documentElement.dataset.theme === "dark";
   const panel = overlay.querySelector<HTMLElement>("[data-loading-overlay-panel]");
-  const title = overlay.querySelector<HTMLElement>("[data-loading-overlay-title]");
-  const description = overlay.querySelector<HTMLElement>("[data-loading-overlay-description]");
+  const message = overlay.querySelector<HTMLElement>("[data-loading-overlay-message]");
 
-  overlay.style.backgroundColor = dark ? "rgba(13, 32, 45, 0.78)" : "rgba(255, 255, 255, 0.78)";
+  overlay.style.backgroundColor = dark ? "rgba(7, 24, 39, 0.14)" : "rgba(255, 255, 255, 0.16)";
   if (panel) {
     panel.style.backgroundColor = dark ? "var(--color-brand-dark-surface)" : "var(--color-brand-surface)";
     panel.style.borderColor = dark ? "var(--color-brand-dark-line)" : "var(--color-brand-line)";
   }
-  if (title) {
-    title.style.color = dark ? "#f1f5f9" : "var(--color-brand-ink)";
-  }
-  if (description) {
-    description.style.color = dark ? "var(--color-brand-dark-muted)" : "var(--color-brand-muted)";
+  if (message) {
+    message.style.color = dark ? "#f1f5f9" : "var(--color-brand-ink)";
   }
 }
 
@@ -181,8 +162,7 @@ function newestRequest(): LoadingRequest | null {
 
 function updateCopy(request: LoadingRequest): void {
   const root = mountOverlay();
-  root.querySelector<HTMLElement>("[data-loading-overlay-title]")!.textContent = request.title;
-  root.querySelector<HTMLElement>("[data-loading-overlay-description]")!.textContent = request.description;
+  root.querySelector<HTMLElement>("[data-loading-overlay-message]")!.textContent = request.message;
 }
 
 function startLoadingAnimation(): void {
@@ -267,10 +247,10 @@ function beginRequest(event: Event): void {
   }
 
   const request: LoadingRequest = {
-    title: trigger.dataset.loadingOverlayTitle?.trim() || "Carregando dados",
-    description:
-      trigger.dataset.loadingOverlayDescription?.trim() ||
-      "Aguarde enquanto a solicitação é processada.",
+    message:
+      trigger.dataset.loadingOverlayMessage?.trim() ||
+      trigger.dataset.loadingOverlayTitle?.trim() ||
+      "Carregando dados...",
   };
 
   activeRequests.set(detail.xhr, request);
