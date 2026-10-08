@@ -1,0 +1,27 @@
+package ui
+
+import "github.com/dimmerz92/go-icons/lucide"
+
+templ DataGridCheckboxCell(columnKey string, name string, value string, label string, checked bool, disabled bool) {
+	@DataGridCell(columnKey) {
+		<label class="inline-flex size-8 cursor-pointer items-center justify-center" title={ label }>
+			if checked {
+				if disabled {
+					<input class="peer sr-only" type="checkbox" name={ name } value={ value } checked disabled aria-label={ label }/>
+				} else {
+					<input class="peer sr-only" type="checkbox" name={ name } value={ value } checked aria-label={ label }/>
+				}
+			} else {
+				if disabled {
+					<input class="peer sr-only" type="checkbox" name={ name } value={ value } disabled aria-label={ label }/>
+				} else {
+					<input class="peer sr-only" type="checkbox" name={ name } value={ value } aria-label={ label }/>
+				}
+			}
+			<span class="grid size-5 place-items-center border border-brand-line bg-brand-surface text-transparent transition duration-200 peer-focus-visible:border-brand-orange peer-focus-visible:ring-2 peer-focus-visible:ring-brand-orange/20 peer-checked:border-brand-orange peer-checked:bg-brand-orange peer-checked:text-white peer-disabled:cursor-not-allowed peer-disabled:opacity-60 [&>svg]:size-[13px] [&>svg]:scale-75 [&>svg]:opacity-0 [&>svg]:transition [&>svg]:duration-150 peer-checked:[&>svg]:scale-100 peer-checked:[&>svg]:opacity-100 dark:border-brand-dark-line dark:bg-brand-deep dark:peer-checked:border-brand-orange dark:peer-checked:bg-brand-orange" aria-hidden="true">
+				@lucide.Check(templ.Attributes{"class": "block"})
+			</span>
+			<span class="sr-only">{ label }</span>
+		</label>
+	}
+}
