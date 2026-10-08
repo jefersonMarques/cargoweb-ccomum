@@ -4,7 +4,6 @@ type HtmxRequestDetail = {
 };
 
 type LoadingRequest = {
-  trigger: HTMLElement;
   title: string;
   description: string;
 };
@@ -217,7 +216,6 @@ function beginRequest(event: Event): void {
   }
 
   const request: LoadingRequest = {
-    trigger,
     title: trigger.dataset.loadingOverlayTitle?.trim() || "Carregando dados",
     description:
       trigger.dataset.loadingOverlayDescription?.trim() ||
@@ -266,5 +264,6 @@ export function initializeLoadingOverlay(): void {
   document.addEventListener("htmx:sendError", finishRequest);
   document.addEventListener("htmx:timeout", finishRequest);
   document.addEventListener("htmx:abort", finishRequest);
+  document.addEventListener("htmx:sendAbort", finishRequest);
   window.addEventListener("pageshow", reset);
 }
